@@ -1,0 +1,15 @@
+CREATE TABLE Users(
+Username Varchar2(20)Primary Key,
+Password Varchar2(16) not null,
+Firstname Varchar2(45) not null,
+Lastname varchar2(45) not null,
+mobilenumber varchar2(10)
+)
+
+
+Insert into Users(Username, Password,Firstname,Lastname,mobilenumber) values('AW204_PC1', 'India@123', 'Admin', 'Admin', '9821225699');
+
+
+SELECT * FROM users01
+
+DROP table users01

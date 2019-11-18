@@ -1,0 +1,104 @@
+Conditional operators   
+
+ int age = 8;
+        String ans;
+        ans = (age > 18 )? "You can vote " : "You can't vote";
+        System.out.println(ans);
+        
+  --------------------------------------------------------------------------      
+Conditional operators
+        int a, b, c, d;
+        a = input.nextInt();
+        b = input.nextInt();
+        c = input.nextInt();
+        d = (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
+
+        System.out.println("Greater number is :" + d);
+----------------------------------------------------------------------------------------------------------
+DATATYPES
+
+byte b = -128; // 1 byte
+
+        short s = -32768;
+        short age = 23;// 2 bytes 
+
+        int i = 2147483647; //  4 bytes 
+        int j = 4_83_647; // underscore operator
+
+        float f = 2.5f; // 4 bytes 
+        float weight = 34.43f;
+
+        long l = 9223372036854775807l; // 8 bytes 
+        long ssn = 12342L;
+
+        double d = 20.50;// 8 bytes 
+        double salary = 1354.23;
+
+        char gender = 'M';
+
+        String name = "Meenal";
+        String email = "Meenaluphale@gmail.com";
+
+        System.out.println("it is byte = " + b);
+        System.out.println("it is short = " + s);
+        System.out.println("it is integer i: = " + i);
+        System.out.println("it is integer j:= " + j);
+        System.out.println("it is long = " + l);
+        System.out.println("it is float = " + f);
+        System.out.println("it is double = " + d);
+        System.out.println("it is character = " + gender);
+
+        System.out.println("it is String = " + name);
+        System.out.println("it is String = " + email);
+=-------------------------------------------------------------------------------------
+
+array 
+
+package com.lti.basics.demos;
+import java.util.Scanner;
+
+public class ArrayDemo {  
+	
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		int marks[]= new int[5];
+		
+		for( int i=0;i<5;i++){
+			System.out.println("Enter marks");
+			marks[i]=sc.nextInt();
+		}
+		
+		for (int i=0;i<5;i++)
+		{
+			System.out.println(marks[i]);
+		}
+}
+}
+-------------------------------------------------------------------------------------
+
+package com.lti.basics.demos;
+import java.util.Scanner;
+
+public class ArrayDemo {  
+	
+	public static void main(String[] args) {
+		Scanner sc= new Scanner(System.in);
+		int no;
+		System.out.println("how many students");
+		no=sc.nextInt();
+		
+		int marks[]= new int[no];
+		
+		for( int i=0;i<no;i++){
+			System.out.println("Enter marks");
+			marks[i]=sc.nextInt();
+		}
+		
+		for (int i=0;i<no;i++)
+		{
+			System.out.println(marks[i]);
+		}
+}
+}
+-------------------------------------------------------------------------------------
+

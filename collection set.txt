@@ -1,0 +1,47 @@
+package com.lti.ArrayListDemos;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class HashSetDemo {
+	
+	public static void main(String[] args) {
+		/*Set mySet = new HashSet();
+		mySet.add(100);
+		mySet.add(100);
+		mySet.add(200);
+		mySet.add("Jay");
+		mySet.add("Sam");
+		
+		System.out.println(mySet);
+		
+		Set tset = new TreeSet();
+		
+		tset.add(500);
+		tset.add(100);
+		tset.add(700);
+		
+		System.out.println(tset);*/
+		
+		Set<Book> mySet = new HashSet();
+		
+		Book b1 = new Book(1,"JAVA");
+		Book b2 = new Book(1,"JAVA");
+		mySet.add(b1);
+		mySet.add(b1);
+		mySet.add(b2);
+		
+		//System.out.println(b1.hashCode());
+		//System.out.println(b2.hashCode());
+		
+		Iterator<Book> it1 = mySet.iterator();
+		while(it1.hasNext()){
+			System.out.println(it1.next());
+			//System.out.println(it1.hashCode());
+		}
+		
+	}
+
+}

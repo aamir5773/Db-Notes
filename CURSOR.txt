@@ -1,0 +1,132 @@
+create table dept10
+(
+empno number(4),
+ename varchar2(10),
+deptno number(2)
+);
+
+create table dept20
+(
+empno number(4),
+ename varchar2(10),
+deptno number(2)
+);
+
+create table dept30
+(
+empno number(4),
+ename varchar2(10),
+deptno number(2)
+);
+
+DECLARE
+
+cursor c1 is 
+select * from emp order by deptno;
+
+myvar c1%rowtype;
+
+BEGIN
+
+OPEN c1;
+Loop
+Exit when c1%NotFound;
+
+FETCH c1 into myvar;
+
+if myvar.deptno=10 then
+insert into dept10 values(myvar.empno,myvar.ename,myvar.deptno);
+end if;
+
+if myvar.deptno=20 then
+insert into dept20 values(myvar.empno,myvar.ename,myvar.deptno);
+end if;
+
+if myvar.deptno=30 then
+insert into dept30 values(myvar.empno,myvar.ename,myvar.deptno);
+end if;
+END LOOP;
+CLOSE c1;
+
+END;
+
+select * from dept10;
+----------------------------------------------------------------------------------
+
+DECLARE 
+
+emp_number number:=9999;
+emp_name emp.ename%type;
+
+BEGIN 
+
+select ename into emp_name from emp where empno=emp_number;
+
+Dbms_output.put_line('employee name is '|| emp_name);
+
+EXCEPTION
+when NO_DATA_FOUND then
+Dbms_output.put_line('No such employee:   '|| emp_number);
+
+END; 
+------------------------------------------------------------------------------------------
+declare
+	emp_name varchar2(10);
+	emp_number number(5);
+	exp1 exception;
+begin 
+emp_number :=10099;
+if emp_number >9999 or emp_number<1000 then 
+Raise exp1;
+Dbms_output.put_line('Not executable statment');
+else
+select ename into emp_name from emp where empno=emp_number;
+Dbms_output.put_line ('employee name is '|| emp_name);
+end if ;
+Exception 
+when exp1 then 
+Dbms_output.put_line('employee number  : '|| emp_number||'  out of range');
+--Raise_Application_Error (-20007,'Employee number is out of range');
+
+End;
+
+-------------------------------------------------------------------------------------
+
+PROCEDURE  :
+
+create or replace procedure sal_incr(emp_no emp.empno%type, salary emp.sal%type) as 
+
+emp_sal emp.sal%type ;
+nosal Exception;
+tot_sal emp.sal%type;
+
+begin
+
+select sal into emp_sal from emp where empno=emp_no;
+
+if emp_sal is null then 
+Raise Nosal;
+else 
+
+update emp set sal=sal+salary where empno=emp_no;
+
+tot_sal:=emp_sal +salary;
+
+Dbms_output.put_line('Salary updated from '||emp_sal|| ' to '|| tot_sal|| ' fro employee number '|| emp_no);
+
+end if ;
+
+Exception 
+When Nosal then 
+Dbms_output.put_line('Salary does not exist for employee'|| emp_no);
+
+when No_data_found then 
+Dbms_output.put_line('No employees exists with the number'||emp_no);
+
+End;
+
+Begin
+sal_incr(9876,5000);
+End;
+
+

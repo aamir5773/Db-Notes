@@ -1,0 +1,123 @@
+1. Accept the stuident id , name, marks, fees and diosplay the grade on the basis of marks
+
+package com.lti.assignments;
+
+import java.util.Scanner;
+
+public class student {
+	public static void main(String[] args) {
+		
+		int s_id,s_marks,s_fees;
+		String s_name;
+		
+		Scanner sc= new Scanner(System.in);
+		
+		System.out.println("Enter Student Id : ");
+		s_id= sc.nextInt();
+	
+		System.out.println("Enter Student Marks : ");
+		s_marks= sc.nextInt();
+		
+
+		System.out.println("Enter Student Fees : ");
+		s_fees = sc.nextInt();
+		
+		System.out.println("Enter student name : ");
+		s_name= sc.next();
+		
+		if(s_marks>=80)
+			System.out.println("Grade is A");
+		
+		if(s_marks>=60 && s_marks<=80)
+			System.out.println("Grade is B");
+		
+		if(s_marks>=50 && s_marks<=60)
+			System.out.println("Grade is C");
+		
+		if(s_marks<50)
+			System.out.println("Grade is Fail");
+		
+	}
+}
+
+----------------------------------------------------------------------------------------
+2.1
+package com.lti.methods.abuser;
+
+public class Excel {
+	
+	public int sum(int x, int y)
+	{
+		int result=x+y;
+		return result;
+	}
+
+}
+
+- -  - - -  - - -  - - -   - - - - -  - -
+2.2
+package com.lti.methods.abuser;
+
+public class User {
+	
+	public static void main(String[] args) {
+		//int result=0;
+		Excel sheet1 = new Excel();
+		/*sheet1.sum(100, -200);
+		System.out.println(result);
+		sheet1.sum(400, 500)*/;
+		int res= sheet1.sum(10, 20);
+		System.out.println("Addition is :" + res);
+		
+		//Excel sheet2 = new Excel();
+	}
+
+}
+
+--------------------------------------------------------------------------
+Q : e bill application basic 
+package com.lti.assignments;
+
+import java.util.Scanner;
+
+public class Ebill {
+	
+	public static void main(String[] args) {
+		
+		//pmr: Previous meter reading 
+		//cmr : Current meter reading
+		
+		int billno, pmr, cmr,units;
+		double bill;
+		
+		Scanner s = new Scanner(System.in);
+		
+		System.out.println("Please Enter you Bill Number : ");
+		billno=s.nextInt();
+		
+		System.out.println("Please enter Previous Meter Reading");
+		pmr= s.nextInt();
+		
+		System.out.println("Please enter Current Meter Reading");
+		cmr= s.nextInt();
+		
+		units=cmr-pmr;
+		System.out.println("Units are " + units);
+		
+		if(units<=50)
+		{
+			bill=2*units;
+			System.out.println("Bill based on your units is : " + bill);
+		}
+		
+		else 
+		{
+			bill=(double)3.5*units;
+			System.out.println("Bill based on your units is : " + bill);
+		}
+	}
+
+}
+
+
+

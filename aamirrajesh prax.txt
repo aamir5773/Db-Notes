@@ -1,0 +1,192 @@
+Select * from EMP where JOB= 'MANAGER';
+
+select * from EMP where ename = 'ALLEN';
+
+
+Select * from EMP where deptno= 20;
+
+Select * From EMP WHERE 
+JOB='MANAGER' AND deptno=20;
+
+Select * From EMP WHERE 
+JOB='MANAGER' OR deptno=20;
+
+select e1.empno, e1.ename,e1.mgr from emp e1, emp e2
+where e1.mgr=e2.empno;
+
+
+select * from emp e, dept d
+where e.deptno(+) = d.deptno;
+
+select ename, hiredate, deptno from emp where deptno=(Select deptno from emp where ename= 'ALLEN');
+
+SELECT * from emp where sal > (Select sal from emp where ename = 'SCOTT')
+
+
+SELECT * FROM emp where sal>ANY(Select sal from emp where job='CLERK');
+
+SELECT * FROM emp where sal<ANY(Select sal from emp where job='CLERK');
+
+SELECT * FROM emp where sal <ALL (Select sal from emp where job='CLERK');
+
+SELECT * FROM emp where sal >ALL (Select sal from emp where job='CLERK');
+
+select ename, job from emp e where EXISTS(select mgr from emp where(emp.mgr=e.empno));
+
+select ename, job,sal from emp e where NOT EXISTS (select sal from emp where(emp.mgr=e.empno));
+
+select ename, mgr from emp e where EXISTS (select hiredate from emp where(emp.mgr=e.empno));
+
+select ename, job from emp e where EXISTS(select mgr from emp where(emp.mgr=e.empno));
+
+select ename, job,sal from emp e where NOT EXISTS (select sal from emp where(emp.mgr=e.empno));
+
+select ename, mgr from emp e where EXISTS (select hiredate from emp where(emp.mgr=e.empno));
+
+
+select ename,length(ename) from emp;
+
+select length('mymaster') from dual;
+
+select LOWER('mymaster') from dual;
+
+
+select UPPER('mymaster') from dual;
+
+select LPAD('Mymaster',10,'/') from dual;
+
+select Rtrim('Mymaster','ster') from dual;
+
+select (UPPER(LTRIM(' Jay'))) from dual;
+
+select substr('mymaster',3,4) from dual;
+
+select chr(65) from dual;
+
+select ascii('A') from dual;
+
+select instr('Tech on the net','e')from dual;
+
+
+select ROUND(65.824,1) from dual;
+
+
+select ROUND(65.824,1) from dual;
+
+select trunc(20.354,1) from dual;
+
+select comm,nvl(comm,100) from emp;
+
+select comm,nvl2(comm,5000,100) from emp;
+
+select ename, empno, sal, job, DECODE(job, 'MANAGER', SAL+5000) new_sal from emp;
+
+select ename,LENGTH(ENAME) "EXPR1", LENGTH(job) "Expr2",
+NULLIF(LENGTH(ename), LENGTH(job)) result FROM emp;
+
+select ename, job, sal,
+CASE job WHEN 'CLERK' THEN sal+2000
+WHEN 'MANAGER' THEN sal+5000
+WHEN 'SALESMAN' THEN sal+3000
+ELSE 
+SAL
+END "REVISED SALARY"
+FROM EMP;
+
+
+
+select SYSDATE from dual ;
+select SYSTIMESTAMP from dual ;
+Select NEXT_DAY(hiredate,'monday') from emp where ename='scott'; 
+select ADD_MONTHS(sysdate,4) from dual ;
+Select NEXT_DAY(SYSDATE,'MONDAY') from dual;
+Select NEXT_DAY(hiredate,'MONDAY') from emp where ename='SCOTT'; 
+select LAST_DAY(SYSDATE) from dual ;
+Select hiredate,SYSDATE, GREATEST(hiredate,SYSDATE) from emp where ename='SCOTT';
+select MONTHS_BETWEEN(SYSDATE,'10-JAN-15') from dual;
+
+select sysdate, TO_CHAR (sysdate,'DAY') from dual;
+select sysdate, TO_CHAR (sysdate,'YEAR') from dual;
+
+ SELECT TO_CHAR(SYSDATE,'DDTH " OF " MONTH YYYY') "NEW" FROM DUAL;
+ SELECT TO_CHAR(SYSDATE,'DDTH " OF " MON YYYY') "NEW" FROM DUAL;
+
+ SELECT TO_DATE('19OCT1959','DD-MON-YYYY') FROM DUAL;
+ SELECT TO_DATE('19OCTOBER1959','DD-MONTH-YYYY') FROM DUAL;
+
+select TO_NUMBER('100') from dual ;
+
+
+
+
+
+
+
+Alter table emp1
+Add comm number(5,2);
+
+Alter table emp1 
+Modify comm Number(7,2);
+
+Alter table emp1
+Add( comm number (5,2) , deptno varchar2(2) );
+
+Alter table emp1 
+Modify deptno number(2);
+
+ALTER TABLE emp1
+MODIFY (CITY VARCHAR2(20) DEFAULT 'AAA');
+
+Alter table emp1
+Modify hiredate default sysdate 
+
+
+
+select * from USER_CONSTRAINTS where table_name='EMP';
+select CONSTRAINT_NAME  from USER_CONSTRAINTS where table_name='EMP';
+
+
+
+
+
+
+
+Views  
+-A view is a logical table on a table or another table 
+- it is a 'stored query' or virtual table 
+- It contains no data of its own 
+- it's a window through which data from base table can be viewed or changed 
+- it does not occupy physical memory 
+- data is retrieved from or update is made to base tables 
+Advantages 
+- restrict access to db because view can display a selective portion of db
+-allow user to make simple query to retrive data from complicated query 
+-additional level of secutiy 
+- provide groups of users access data as per the need 
+-allow same data to be seen  by diff users in diff ways.
+-provide data independancy for application programmers.
+
+
+
+select ename,sal,
+  row_number() over (order by sal desc)rn,  
+        rank() over (order by sal desc)rnk,
+  dense_rank() over (order by sal desc)drnk
+     from emp
+    order by sal desc;
+
+
+SET SERVEROUTPUT ON
+
+DECLARE
+
+v_sal number(6);
+
+BEGIN 
+
+SELECT sal INTO v_sal FROM emp where empno=7698;
+DBMS_OUTPUT.PUT_LINE (v_sal);
+
+END;
+
+

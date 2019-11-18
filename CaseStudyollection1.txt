@@ -1,0 +1,131 @@
+1.
+
+package com.lti.shopping.entity;
+
+public class Product {
+	
+	int prdId;
+	String prdName;
+	double prdCost;
+	
+	public Product(int prdId, String prdName, double prdCost) {
+		super();
+		this.prdId = prdId;
+		this.prdName = prdName;
+		this.prdCost = prdCost;
+	}
+
+	public Product() {
+		super();
+	}
+
+	public int getPrdId() {
+		return prdId;
+	}
+
+	public void setPrdId(int prdId) {
+		this.prdId = prdId;
+	}
+
+	public String getPrdName() {
+		return prdName;
+	}
+
+	public void setPrdName(String prdName) {
+		this.prdName = prdName;
+	}
+
+	public double getPrdCost() {
+		return prdCost;
+	}
+
+	public void setPrdCost(double prdCost) {
+		this.prdCost = prdCost;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [prdId=" + prdId + ", prdName=" + prdName + ", prdCost=" + prdCost + "]";
+	}
+	
+	
+}
+
+-------------------------------------------------------------------------------------------------------------------
+2.
+package com.lti.shopping.user;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.lti.shopping.entity.Product;
+import com.lti.shopping.services.IProduct;
+import com.lti.shopping.services.ImplProduct;
+
+public class UserApp {
+
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		String ans;
+		int no;
+		do {
+			System.out.println("***** DMART Products Services ****");
+			System.out.println("1.Add product ");
+			System.out.println("2.Display all product ");
+			System.out.println("Pls enter your choice: ");
+			no = sc.nextInt();
+
+			switch (no) {
+			case 1: Product P= new Product(101,"Mobile",5000);
+					IProduct service = new ImplProduct();
+					service.addProduct(P);
+					List<Product> prdList = new ArrayList<>();
+					prdList = service.addProduct(P);
+					System.out.println(P);
+					break;
+			case 2: System.out.println("case 2");
+					break;
+			default:System.out.println("Enter proper choice");
+					break;
+			}
+			System.out.println("Do you want to continue yes/no");
+			ans = sc.next();
+		} while (ans.equals("Yes") || ans.equals("y") || ans.equals("yes"));
+	}
+
+}
+---------------------------------------------------------------------------------------------------------------
+3.
+package com.lti.shopping.services;
+
+import java.util.List;
+
+import com.lti.shopping.entity.Product;
+
+public interface IProduct {
+
+	public abstract List<Product> addProduct(Product p); 
+}
+---------------------------------------------------------------------
+4.
+package com.lti.shopping.services;
+
+import com.lti.shopping.entity.Product;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ImplProduct implements IProduct {
+	
+	List<Product> myList = new ArrayList<>();
+	
+
+	@Override
+	public List<Product> addProduct(Product p) {
+		myList.add(p);
+		return myList;
+	}
+	
+
+}

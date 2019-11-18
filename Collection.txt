@@ -1,0 +1,230 @@
+Basic collection program
+
+package com.lti.arraylistdemos;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class ArrayListDemo {
+	
+	public static void main(String[] args) {
+		
+		List myList = new ArrayList();
+		
+		myList.add(100);
+		myList.add(200);
+		myList.add(300);
+		myList.add(300);
+		myList.add("Jay");
+		myList.add(7000.00);
+		
+		System.out.println(myList);
+		
+		myList.remove(2);
+		
+		System.out.println(myList);
+		
+		myList.add(3,300);
+		
+		System.out.println(myList);
+
+//		Collections.sort(myList);
+//		System.out.println(myList);
+		
+		
+	}
+	
+	
+
+}
+----------------------------------------------------------------------------------------------------------
+
+
+
+1.package com.lti.arraylistdemos;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Demo2 {
+	
+	public static void main(String[] args) {
+		
+		Employee e1 = new Employee(101,"Jay",50000.00f);
+		Employee e2 = new Employee(102,"Vijay",60000.00f);
+		Employee e3 = new Employee(103,"Sanjay",70000.00f);
+		
+		List myList= new ArrayList();
+		//List<Employee> myList= new ArrayList<>();    generics
+		
+		myList.add(e1);
+		myList.add(e2);
+		myList.add(e3);
+		
+		System.out.println(myList);
+		
+		
+		Book b1= new Book(1111,"Java");
+		Book b2= new Book(1112,"Oracle");
+		
+		myList.add(b1);
+		myList.add(b2);
+
+
+			
+		for (Object o:myList)
+		{
+			System.out.println(o);
+		}
+		
+		
+		Iterator it1 = myList.iterator();
+		while(it1.hasNext())
+		{
+			System.out.println( it1.next());
+		}	
+		
+		System.out.println(myList);
+		
+		
+		
+}
+
+}
+
+
+2.
+
+package com.lti.arraylistdemos;
+
+public class Employee {
+	
+	int empid;
+	String empname;
+	float empSal;
+	
+	@Override
+	public String toString() {
+		return "\nEmployee [empid= \n" + empid + ", empname=\n" + empname + ", empSal=\n" + empSal + "]";
+	}
+
+	public int getEmpid() {
+		return empid;
+	}
+
+	public void setEmpid(int empid) {
+		this.empid = empid;
+	}
+
+	public String getEmpname() {
+		return empname;
+	}
+
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+
+	public float getEmpSal() {
+		return empSal;
+	}
+
+	public void setEmpSal(float empSal) {
+		this.empSal = empSal;
+	}
+
+	public Employee(int empid, String empname, float empSal) {
+		super();
+		this.empid = empid;
+		this.empname = empname;
+		this.empSal = empSal;
+	}
+
+	public Employee() {
+		super();
+	}
+	
+	
+	
+
+}
+
+
+3.
+
+
+package com.lti.arraylistdemos;
+
+public class Book {
+	
+	int bookId;
+	String bookName;
+	public int getBookId() {
+		return bookId;
+	}
+	public void setBookId(int bookId) {
+		this.bookId = bookId;
+	}
+	public String getBookName() {
+		return bookName;
+	}
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+	
+	
+	public Book(int bookId, String bookName) {
+		super();
+		this.bookId = bookId;
+		this.bookName = bookName;
+	}
+	public Book() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "\nBook [bookId=" + bookId + ", bookName=" + bookName + "]";
+	}
+	
+
+
+}
+--------------------------------------------------------------------------------------------------
+
+package com.lti.arraylistdemos;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class DemoSet {
+	
+	public static void main(String[] args) {
+
+		Set mySet= new HashSet();
+		
+		
+		mySet.add(300);
+		mySet.add(100);
+		mySet.add(200);
+		mySet.add(100);
+        //mySet.add("Jay");
+		//mySet.add("Jay");		
+		
+		System.out.println(mySet);
+		
+		Set tset= new TreeSet();
+		
+		tset.add(3000);
+		tset.add(2000);
+		tset.add(2500);
+		
+		System.out.println(tset);
+		
+		
+		
+		
+	//	System.out.println(mySet);		
+}
+}
+

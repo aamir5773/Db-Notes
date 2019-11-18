@@ -1,0 +1,27 @@
+step 1: 
+create table bonus
+(ename ,job,sal,comm ) as select ename,job,sal,comm from emp;
+
+step 2: 
+delete from bonus;
+
+step 3: 
+Create or replace Trigger Trg1
+After Delete or Insert or Update of Ename,Job,Sal,Comm on emp 
+ For Each Row 
+begin
+if inserting then 
+insert into Bonus Values(:New.ename,:New.job,:New.Sal,:New.Comm);
+end if;
+if deleting then
+delete from Bonus where ename=:Old.ename;
+end if;
+if updating then 
+Update bonus set sal=:New.sal,job=:New.job,comm=:New.comm where ename=:Old.ename;
+end if ;
+end; 
+
+step 4: 
+INSERT INTO EMP VALUES (1234,'AAMIR','MANAGER',7839,'1-MAY-81',2850,NULL,30);
+
+SELECT * FROM BONUS; 

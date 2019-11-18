@@ -1,0 +1,85 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+
+v_sal number(6);
+
+BEGIN 
+
+SELECT sal INTO v_sal FROM emp where empno=7698;
+DBMS_OUTPUT.PUT_LINE (V_SAL);
+
+END;
+
+------------------------------------------------------------------
+
+DISPLAY THE JOB OF ALLEN
+
+DECLARE 
+
+v_job varchar2(13);
+
+BEGIN
+
+SELECT job INTO v_job from emp where ename='ALLEN';
+DBMS_OUTPUT.PUT_LINE(v_job);
+
+END
+-------------------------------------------------------------------------
+how to declare same datatype as of main table
+
+DECLARE 
+
+v_job emp.job%type;
+
+BEGIN
+
+SELECT job INTO v_job from emp where ename='ALLEN';
+DBMS_OUTPUT.PUT_LINE(v_job);
+
+END;
+
+----------------------------------------------------
+
+DECLARE 
+
+v_job emp.job%type;
+v_name emp.ename%type;
+v_sal emp.sal%type;
+
+BEGIN
+
+SELECT job,ename,sal INTO v_job, v_name, v_sal FROM emp where ename='ALLEN';
+DBMS_OUTPUT.PUT_LINE ('Job : ' || v_job || 'Name : ' ||v_name || 'Sal : ' ||v_sal);
+
+END;
+
+--------------------------------------------------------------------------------------------------------
+DECLARE 
+
+var1 emp%rowtype;
+
+BEGIN
+
+select * into var1 from emp where empno=7654;
+dbms_output.put_line (var1.empno||' '||var1.ename||' '||var1.comm);
+
+END;
+---------------------------------------------------------------------------------------------
+
+DECLARE 
+	type emp_type  is RECORD
+	(
+	emp_no emp.empno%type ,
+	emp_name emp.ename%type,
+	emp_sal emp.sal%type
+	);
+	emp_rec emp_type;
+	
+BEGIN
+select empno,ename, sal  into emp_rec from emp where empno=7369;
+Dbms_output.put_line(' Employees Number is: '|| emp_rec.emp_no|| 
+                                        ' Employees Name  is: '|| emp_rec.emp_name||
+                                          ' Employees salary is: '|| emp_rec.emp_sal
+                                      );
+end;

@@ -1,0 +1,21 @@
+@Override
+	public Product showProduct(int prdNo) {
+		Product p = null;
+		try (Connection conn = DbUtil.getConnection()) {
+			System.out.println("connected");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery("Select * from Products where Prdid=" + prdNo);
+
+			while (rs.next()) {
+				int id = rs.getInt(1);
+				String name = rs.getString(2);
+				float cost = rs.getFloat(3);
+				p = new Product(id, name, cost);
+			}
+			return p;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return p;
+
+	}

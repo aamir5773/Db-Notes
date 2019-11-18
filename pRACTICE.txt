@@ -1,0 +1,174 @@
+1.  package com.lti.shopping.entity1;
+
+public class Product1 {
+	
+	int prdid;
+	String prdName;
+	float prdCost;
+	
+	public Product1(int prdid, String prdName, double d) {
+		super();
+		this.prdid = prdid;
+		this.prdName = prdName;
+		this.prdCost = (float) d;
+	}
+
+	public Product1() {
+		super();
+	}
+
+	public int getPrdid() {
+		return prdid;
+	}
+
+	public void setPrdid(int prdid) {
+		this.prdid = prdid;
+	}
+
+	public String getPrdName() {
+		return prdName;
+	}
+
+	public void setPrdName(String prdName) {
+		this.prdName = prdName;
+	}
+
+	public float getPrdCost() {
+		return prdCost;
+	}
+
+	public void setPrdCost(float prdCost) {
+		this.prdCost = prdCost;
+	}
+
+	@Override
+	public String toString() {
+		return "Product1 [prdid=" + prdid + ", prdName=" + prdName + ", prdCost=" + prdCost + "]";
+	}
+	
+	
+	
+	
+
+}
+---------------------------------------------------------------------------------------------------------------------
+2.
+
+package com.lti.shopping.dao;
+
+import com.lti.shopping.entity1.Product1;
+
+public interface IDaoProduct {
+	
+	public abstract void addProduct(Product1 p);
+	public abstract List<Product1> getAllProducts();
+
+
+}
+------------------------------------------------------------------
+3.
+
+package com.lti.shopping.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.lti.shopping.entity1.Product1;
+
+public class ImplDaoProduct implements IDaoProduct {
+
+	@Override
+	public void addProduct(Product1 p) {
+		System.out.println("Calling addProduct()......inside dao");
+		System.out.println(p);
+		
+		try{
+			String url = "jdbc:oracle:thin:scott@//localhost:1521/XE";
+			 
+			 Connection  conn=DriverManager.getConnection(url,"HR","HR");
+			
+			 PreparedStatement pstmt = conn.prepareStatement("Insert into Products(pid,pName,price) values(?,?,?");
+			 pstmt.setInt(1, p.getPrdid());
+			 pstmt.setFloat(2, p.getPrdCost());
+			 pstmt.setNString(3, p.getPrdName());
+			 
+			 int i= pstmt.executeUpdate();
+			 System.out.println(i + "Record Added");
+
+
+
+				Statement stmt = conn.createStatement();			
+				ResultSet rs = stmt.executeQuery("Select * from Products");
+				
+				while (rs.next()) 
+				{
+					int id = rs.getInt(1);
+					String name = rs.getString(2);
+					float cost = rs.getFloat(3);
+					Product p = new Product(id, name, cost);
+					myList.add(p);
+			 
+
+
+
+		}catch (SQLException e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+	}
+
+}
+----------------------------------------------------------------------------------------------------
+
+4.
+
+package com.lti.shopping.user1;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import com.lti.shopping.dao.IDaoProduct;
+import com.lti.shopping.dao.ImplDaoProduct;
+import com.lti.shopping.entity1.Product1;
+
+
+
+public class UserApp1 {
+
+	public static void main(String[] args) {
+		
+		IDaoProduct service = new ImplDaoProduct();
+
+		Scanner sc = new Scanner(System.in);
+		String ans;
+		int no;
+		do {
+			System.out.println("***** DMART Products Services ****");
+			System.out.println("1.Add product ");
+			System.out.println("2.Display all product ");
+			System.out.println("Pls enter your choice: ");
+			no = sc.nextInt();
+
+			switch (no) {
+			case 1: System.out.println("Inside Switch CAse 1");
+					System.out.println("Enter Details of Product");
+					Product1 p1 = new Product1(sc.nextInt(),sc.next(),sc.nextFloat());
+					service.addProduct(p1);
+					
+					break;
+			case 2: System.out.println("case 2");
+					break;
+			default:System.out.println("Enter proper choice");
+					break;
+			}
+			System.out.println("Do you want to continue yes/no");
+			ans = sc.next();
+		} while (ans.equals("Yes") || ans.equals("y") || ans.equals("yes"));
+	}
+
+}

@@ -1,0 +1,28 @@
+SET SERVEROUTPUT ON
+
+DECLARE
+
+v_sal number(6);
+
+BEGIN 
+
+SELECT sal INTO v_sal FROM emp where empno=7698;
+DBMS_OUTPUT.PUT_LINE (V_SAL);
+
+END;
+
+------------------------------------------------------------------
+
+DISPLAY ME THE JOB OF ALLEN
+
+DECLARE 
+
+v_job varchar2(13);
+
+BEGIN
+
+SELECT job INTO v_job from emp where ename='ALLEN';
+DBMS_OUTPUT.PUT_LINE(v_job);
+
+END
+-------------------------------------------------------------------------
